@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f8dce1" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#3d1019" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6eef0">
+<meta name="color-scheme" content="light">
+
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Study">
 <title>Study</title>
@@ -19,6 +20,7 @@
 <style>
 /* Uma cor de destaque (--accent, escolhida em ⚙) gera todo o resto. */
 :root{
+  color-scheme:light;
   --accent:#b3132f; --on-accent:#fff; --acc-l:#b3132f;
   --accent-text:var(--acc-l);
   --bg:color-mix(in srgb,var(--accent) 5%,#f6f6f8);
@@ -32,7 +34,7 @@
   --sans:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
-@media (prefers-color-scheme:dark){:root{
+@media not all{:root{
   --accent-text:color-mix(in srgb,var(--accent) 62%,#fff);
   --bg:color-mix(in srgb,var(--accent) 9%,#0b0b0e); --ink:#f3f3f7; --muted:color-mix(in srgb,var(--accent) 16%,#a5a5b1);
   --line:rgba(255,255,255,.09); --card:rgba(255,255,255,.055); --card-solid:color-mix(in srgb,var(--accent) 8%,#17171c); --field:rgba(255,255,255,.07);
@@ -52,13 +54,13 @@ button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:2px solid var(--accent-text);outline-offset:2px}
 .glassy,.card,.kpis>div,.seg,nav,.iconbtn,.chip{background:var(--card);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border:1px solid color-mix(in srgb,#fff 55%,var(--line))}
-@media (prefers-color-scheme:dark){.glassy,.card,.kpis>div,.seg,nav,.iconbtn,.chip{border-color:var(--line)}}
+@media not all{.glassy,.card,.kpis>div,.seg,nav,.iconbtn,.chip{border-color:var(--line)}}
 
 /* ícones de vidro */
 .gi{flex:none;display:block}
 .gi .so{fill:var(--accent)}
 .gi .gl{fill:color-mix(in srgb,var(--accent) 42%,#fff);fill-opacity:.62}
-@media (prefers-color-scheme:dark){.gi .gl{fill:color-mix(in srgb,var(--accent) 55%,#fff);fill-opacity:.4}}
+@media not all{.gi .gl{fill:color-mix(in srgb,var(--accent) 55%,#fff);fill-opacity:.4}}
 .gi .rim{fill:none;stroke:#fff;stroke-opacity:var(--rim);stroke-width:1}
 .gi .dt{fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .gi .dd{fill:#fff}
@@ -501,7 +503,7 @@ function applyColor() {
   // cor de texto legível sobre fundo claro: escurece as cores muito claras
   let t = c, k = 0; while (contrast(t, "#ffffff") < 4.5 && k < 10) { t = mixHex(c, "#000000", (++k) * .07); }
   r.setProperty("--acc-l", t);
-  document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute("content", mixHex(c, matchMedia("(prefers-color-scheme: dark)").matches ? "#0b0b0e" : "#f6f6f8", .88)));
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute("content", mixHex(c, "#f6f6f8", .88)));
 }
 const CHERRY = (size = 28) => { const x = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   x.setAttribute("viewBox", "0 0 32 32"); x.setAttribute("width", size); x.setAttribute("height", size); x.setAttribute("aria-hidden", "true");
